@@ -27,7 +27,7 @@ A client mod that notifies you which bosses are present in your raid.
 ## Build
 
 ```
-dotnet build -p:SPT_PATH="C:\Games\SPT 4.1"
+dotnet build BossNotifier.csproj -p:SPT_PATH="C:\Games\SPT 4.1"
 ```
 
 Reads DLL reference paths from the `SPT_PATH` MSBuild property (pass it on the command line, or set as an env

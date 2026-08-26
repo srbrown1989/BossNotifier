@@ -9,6 +9,14 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
+  <!-- BossNotifier.Fika/ is a separate, optional companion project (co-op kill-sync via Fika) -
+       not built by this project, and not currently ported to this SPT version. See CLAUDE.md. -->
+  <ItemGroup>
+    <Compile Remove="BossNotifier.Fika\**" />
+    <EmbeddedResource Remove="BossNotifier.Fika\**" />
+    <None Remove="BossNotifier.Fika\**" />
+  </ItemGroup>
+
   <ItemGroup>
     <Reference Include="BepInEx">
       <HintPath>$(SPT_PATH)\BepInEx\core\BepInEx.dll</HintPath>

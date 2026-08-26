@@ -27,12 +27,19 @@ verifying real client APIs: `C:\Dev\spt-reference\client-dlls\Assembly-CSharp.dl
 ## Build
 
 ```
-dotnet build -p:SPT_PATH="C:\Games\SPT 4.1"
+dotnet build BossNotifier.csproj -p:SPT_PATH="C:\Games\SPT 4.1"
 ```
 
-Single project, `netstandard2.1` (same as TaskItemIndicator's client project — BepInEx plugins target this, not
-`net10.0` like the server-side mods), reads DLL reference paths from the `SPT_PATH` MSBuild property (same
-convention as TaskItemIndicator, no default — must be passed on the command line). Output at
+**Must target `BossNotifier.csproj` explicitly, not just the folder/`.sln`** — this repo's `.sln` (inherited
+from upstream) references both this project and `BossNotifier.Fika/`, and the Fika companion project doesn't
+have its own DLL references set up (it's not part of this fork's build target at all, see "Porting notes"
+below) — a bare `dotnet build` picks up the `.sln` and tries to build both, failing on the Fika project.
+`BossNotifier.csproj` itself excludes `BossNotifier.Fika\**` from its own compile (`<Compile Remove>`), same as
+upstream's own csproj did, so this only fails if the wrong build target is used.
+
+`netstandard2.1` (same as TaskItemIndicator's client project — BepInEx plugins target this, not `net10.0` like
+the server-side mods), reads DLL reference paths from the `SPT_PATH` MSBuild property (same convention as
+TaskItemIndicator, no default — must be passed on the command line). Output at
 `bin\Debug\netstandard2.1\BossNotifier.dll`. No test/lint scripts.
 
 ## Porting notes (from the upstream 4.0.11-targeting source)
