@@ -1,6 +1,10 @@
-# BossNotifier for SPT 4.0.11
+# BossNotifier
 
 A client mod that notifies you which bosses are present in your raid.
+
+> This fork updates [Mattexe21/BossNotifier](https://github.com/Mattexe21/BossNotifier) (itself an update of
+> the original [m-barneto/BossNotifier](https://github.com/m-barneto/BossNotifier)) to build against a newer
+> SPT client. See `CLAUDE.md` for exactly what changed in the port.
 
 ## Features
 
@@ -16,26 +20,25 @@ A client mod that notifies you which bosses are present in your raid.
 
 ## Installation
 
-
-1. Download the latest release from [Releases](https://github.com/Mattexe21/BossNotifier/releases/tag/Latest)
-2. Extract the zip into your SPT root folder (where `SPT.Server.exe` is)
+1. Build from source (see below)
+2. Drop `BossNotifier.dll` into `BepInEx\plugins\`
 3. Start the game
 
+## Build
 
-## Build Requirements
+```
+dotnet build -p:SPT_PATH="C:\Games\SPT 4.1"
+```
 
-If you want to compile from source, you need these DLLs:
-- `BepInEx.dll` (from SPT/BepInEx/core/)
-- `0Harmony.dll` (from SPT/BepInEx/core/)
-- `Assembly-CSharp.dll` (from SPT/EscapeFromTarkov_Data/Managed/)
-- `UnityEngine.dll` (from SPT/EscapeFromTarkov_Data/Managed/)
-- `spt-reflection.dll` (from SPT/BepInEx/plugins/spt/)
-- `spt-common.dll` (from SPT/BepInEx/plugins/spt/)
+Reads DLL reference paths from the `SPT_PATH` MSBuild property (pass it on the command line, or set as an env
+var) - no default. The optional `BossNotifier.Fika/` companion project (co-op kill-sync via Fika) is present in
+this repo as shipped upstream but isn't part of the default build target here; see `CLAUDE.md` for why.
 
 ## Credits
 
 - Original mod by [Mattdokn](https://github.com/m-barneto/BossNotifier)
-- Updated for SPT 4.0.11
+- Updated for SPT 4.0.11 by [Mattexe21](https://github.com/Mattexe21/BossNotifier)
+- This fork: updated to build against a newer SPT client
 
 ## License
 

@@ -19,7 +19,7 @@ using System.Linq;
 
 namespace BossNotifier
 {
-    [BepInPlugin("Mattexe.BossNotifier", "BossNotifier", "1.1.1")]
+    [BepInPlugin("com.imperator.bossnotifier", "BossNotifier", "1.0.0")]
     [BepInDependency("com.fika.core", BepInDependency.DependencyFlags.SoftDependency)]
     public class BossNotifierPlugin : BaseUnityPlugin
     {
@@ -293,7 +293,7 @@ namespace BossNotifier
             // Subscribe to config changes
             Config.SettingChanged += Config_SettingChanged;
 
-            Logger.LogInfo($"Plugin BossNotifier v1.1.1 is loaded!");
+            Logger.LogInfo($"Plugin BossNotifier v1.0.0 is loaded!");
 
             // Invoke event for addon to hook into
             OnPluginAwake?.Invoke();
@@ -711,7 +711,7 @@ namespace BossNotifier
                 string notif = BotBossPatch.vicinityNotifications.Dequeue();
                 if (Instance.intelCenterLevel >= BossNotifierPlugin.intelCenterDetectedUnlockLevel.Value)
                 {
-                    NotificationManagerClass.DisplayMessageNotification(notif, ENotificationDurationType.Long);
+                    NotificationManager.DisplayMessageNotification(notif, ENotificationDurationType.Long);
                     Instance.GenerateBossNotifications();
                 }
             }
@@ -728,7 +728,7 @@ namespace BossNotifier
                 _markersVisible = !_markersVisible;
                 ToggleAllMarkers(_markersVisible);
                 string status = _markersVisible ? "ON" : "OFF";
-                NotificationManagerClass.DisplayMessageNotification($"Boss Markers: {status}", ENotificationDurationType.Default);
+                NotificationManager.DisplayMessageNotification($"Boss Markers: {status}", ENotificationDurationType.Default);
             }
 
             // Update markers
@@ -903,13 +903,13 @@ namespace BossNotifier
 
             if (bossNotificationMessages.Count == 0)
             {
-                NotificationManagerClass.DisplayMessageNotification("No Bosses Located", ENotificationDurationType.Long);
+                NotificationManager.DisplayMessageNotification("No Bosses Located", ENotificationDurationType.Long);
                 return;
             }
 
             foreach (var bossMessage in bossNotificationMessages)
             {
-                NotificationManagerClass.DisplayMessageNotification(bossMessage, ENotificationDurationType.Long);
+                NotificationManager.DisplayMessageNotification(bossMessage, ENotificationDurationType.Long);
             }
         }
 
